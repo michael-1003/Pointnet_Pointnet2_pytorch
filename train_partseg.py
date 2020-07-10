@@ -37,7 +37,7 @@ def to_categorical(y, num_classes):
 def parse_args():
     parser = argparse.ArgumentParser('Model')
     parser.add_argument('--model', type=str, default='pointnet2_part_seg_msg', help='model name [default: pointnet2_part_seg_msg]')
-    parser.add_argument('--batch_size', type=int, default=16, help='Batch Size during training [default: 16]')
+    parser.add_argument('--batch_size', type=int, default=8, help='Batch Size during training [default: 16]')
     parser.add_argument('--epoch',  default=251, type=int, help='Epoch to run [default: 251]')
     parser.add_argument('--learning_rate', default=0.001, type=float, help='Initial learning rate [default: 0.001]')
     parser.add_argument('--gpu', type=str, default='0', help='GPU to use [default: GPU 0]')
@@ -87,7 +87,7 @@ def main(args):
     log_string('PARAMETER ...')
     log_string(args)
 
-    root = 'data/shapenetcore_partanno_segmentation_benchmark_v0_normal/'
+    root = '/data1/pointnet_test/shapenetcore_partanno_segmentation_benchmark_v0_normal/'
 
     TRAIN_DATASET = PartNormalDataset(root = root, npoints=args.npoint, split='trainval', normal_channel=args.normal)
     trainDataLoader = torch.utils.data.DataLoader(TRAIN_DATASET, batch_size=args.batch_size,shuffle=True, num_workers=4)
